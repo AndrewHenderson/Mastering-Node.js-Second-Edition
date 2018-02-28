@@ -17,6 +17,7 @@ let check = function() {
     const text = crypto.randomBytes(70).toString('hex');
     buffer.write(text, idx * 140, 140);
   }
+  writeStream.write(buffer);
   setTimeout(check, 10000);
 };
 

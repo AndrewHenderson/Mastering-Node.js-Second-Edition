@@ -1,6 +1,8 @@
 let fs = require('fs');
 let http = require('http');
 
+require('./createTweet.js');
+
 let theUser = null;
 let userPos = 0;
 let tweetFile = 'tweets.txt';
@@ -27,7 +29,7 @@ let sendNext = function(fd) {
   fs.read(fd, buffer, 0, 140, userPos * 140, (err, num) => {
     if (!err && num > 0 && theUser) {
       ++userPos;
-      theUser.write(`data: ${buffer.toString('utf')}\n\n`);
+      theUser.write(`data: ${buffer.toString('utf-8', 0, num)}\n\n`);
 
       return process.nextTick(() => {
         sendNext(fd);
